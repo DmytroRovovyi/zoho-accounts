@@ -7,3 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/oauth2/callback', [ZohoAuthController::class, 'handleCallback']);
+Route::get('/zoho/refresh-token', [ZohoAuthController::class, 'refreshAccessToken']);
