@@ -7,6 +7,7 @@ export default function useZohoForm() {
     const accountName = ref('');
     const accountWebsite = ref('');
     const accountPhone = ref('');
+
     const successMessage = ref('');
     const errorMessage = ref('');
     const errors = ref({});
@@ -14,15 +15,10 @@ export default function useZohoForm() {
 
     const stages = ['Qualification', 'Proposal', 'Negotiation', 'Closed Won', 'Closed Lost'];
 
-    const validate = () => {
-        errors.value = {};
-        return Object.keys(errors.value).length === 0;
-    };
-
     const submitForm = async () => {
-        if (!validate()) return;
         successMessage.value = '';
         errorMessage.value = '';
+        errors.value = {};
         isSubmitting.value = true;
 
         try {
@@ -40,7 +36,14 @@ export default function useZohoForm() {
                 }),
             });
 
+            if (response.status === 422) {
+                const data = await response.json();
+                errors.value = data.errors || {};
+                return;
+            }
+
             const result = await response.json();
+
             if (response.ok) {
                 successMessage.value = 'Deal and Account created successfully!';
                 dealName.value = '';
@@ -70,5 +73,5 @@ export default function useZohoForm() {
         stages,
         isSubmitting,
         submitForm,
-};
+    };
 }
