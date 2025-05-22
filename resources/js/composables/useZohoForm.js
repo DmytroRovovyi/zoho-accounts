@@ -10,42 +10,20 @@ export default function useZohoForm() {
     const successMessage = ref('');
     const errorMessage = ref('');
     const errors = ref({});
+    const isSubmitting = ref(false);
+
     const stages = ['Qualification', 'Proposal', 'Negotiation', 'Closed Won', 'Closed Lost'];
 
     const validate = () => {
         errors.value = {};
-        if (!dealName.value) errors.value.dealName = 'Deal Name is required.';
-        if (!dealStage.value) errors.value.dealStage = 'Deal Stage is required.';
-        if (!accountName.value) errors.value.accountName = 'Account Name is required.';
-        if (accountWebsite.value && !isValidURL(accountWebsite.value)) {
-            errors.value.accountWebsite = 'Invalid URL.';
-        }
-        if (!accountPhone.value) {
-            errors.value.accountPhone = 'Account Phone is required.';
-        } else if (!isValidPhone(accountPhone.value)) {
-            errors.value.accountPhone = 'Invalid phone number.';
-        }
         return Object.keys(errors.value).length === 0;
-    };
-
-    const isValidURL = (url) => {
-        try {
-            new URL(url);
-            return true;
-        } catch {
-            return false;
-        }
-    };
-
-    const isValidPhone = (phone) => {
-        const phoneRegex = /^\+?[0-9\s\-]{7,15}$/;
-        return phoneRegex.test(phone);
     };
 
     const submitForm = async () => {
         if (!validate()) return;
         successMessage.value = '';
         errorMessage.value = '';
+        isSubmitting.value = true;
 
         try {
             const response = await fetch('/api/zoho/create', {
@@ -75,6 +53,8 @@ export default function useZohoForm() {
             }
         } catch (err) {
             errorMessage.value = 'Network error or server problem.';
+        } finally {
+            isSubmitting.value = false;
         }
     };
 
@@ -88,6 +68,7 @@ export default function useZohoForm() {
         errorMessage,
         errors,
         stages,
+        isSubmitting,
         submitForm,
-    };
+};
 }

@@ -20,7 +20,10 @@
         <input v-model="accountPhone" type="tel" placeholder="Account Phone" />
         <div v-if="errors.accountPhone">{{ errors.accountPhone }}</div>
 
-        <button type="submit">Submit</button>
+        <button :disabled="isSubmitting" type="submit">
+            <span v-if="isSubmitting">Submitting…</span>
+            <span v-else>Submit</span>
+        </button>
 
         <div v-if="successMessage" class="alert-success">{{ successMessage }}</div>
         <div v-if="errorMessage" class="alert-error">{{ errorMessage }}</div>
@@ -40,6 +43,7 @@ const {
     errorMessage,
     errors,
     stages,
+    isSubmitting,
     submitForm,
 } = useZohoForm()
 </script>
