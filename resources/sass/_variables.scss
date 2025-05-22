@@ -5,3 +5,15 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+// Form colors
+$form-bg: #ffffff;
+$form-title-color: #343a40;
+$form-input-bg: #f9f9f9;
+$form-input-border: #ced4da;
+$form-submit-bg: #0d6efd;
+$form-submit-hover-bg: darken($form-submit-bg, 5%);
+$form-success-text: #198754;
+$form-success-bg: #d1e7dd;
+$form-error-text: #dc3545;
+$form-error-bg: #f8d7da;
