@@ -15,8 +15,8 @@ import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
 // Import the HelloVue component and register it globally
-import HelloVue from './components/HelloVue.vue';
-app.component('hello-vue', HelloVue);
+import ZohoDealAccountForm from './components/ZohoDealAccountForm.vue'
+app.component('zoho-deal-account-form', ZohoDealAccountForm)
 
 // Mount the Vue application to the element with id="app"
 app.mount('#app');
