@@ -17,12 +17,18 @@
     select {
         display: block;
         width: 100%;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         padding: 0.5rem;
         font-size: $font-size-base;
         border: 1px solid $form-input-border;
         border-radius: 4px;
         background-color: $form-input-bg;
+    }
+
+    .form-error {
+        font-size: 0.85rem;
+        color: $form-error-text;
+        margin-bottom: 1rem;
     }
 
     button[type="submit"] {
@@ -53,11 +59,5 @@
         padding: 0.75rem;
         border-radius: 4px;
         margin-top: 1rem;
-    }
-
-    div[v-if] {
-        font-size: 0.85rem;
-        color: $form-error-text;
-        margin-bottom: 0.5rem;
     }
 }
